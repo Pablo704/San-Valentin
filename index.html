@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti ❤️</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffe6e6; /* Fondo rosado suave */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden; /* Evita barras de desplazamiento si el botón crece mucho */
+            flex-direction: column;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        #yesBtn {
+            background-color: #28a745; /* Verde */
+            color: white;
+            font-weight: bold;
+        }
+
+        #noBtn {
+            background-color: #dc3545; /* Rojo */
+            color: white;
+        }
+
+        /* Estilo de la invitación final */
+        #invitation {
+            display: none; /* Oculto al principio */
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            color: #d63384;
+            animation: fadeIn 1s;
+        }
+
+        #invitation h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        #invitation p {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        img {
+            max-width: 150px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="question-screen">
+        <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+        <div class="container">
+            <button id="yesBtn" class="btn">Sí</button>
+            <button id="noBtn" class="btn">No</button>
+        </div>
+    </div>
+
+    <div id="invitation">
+        <h2>¡Sabía que dirías que sí! ❤️</h2>
+        <p>Cita 14 de febrero a las 20:00 horas.</p>
+        <p><strong>Vestirse elegante.</strong></p>
+        <p>Te amo.</p>
+        <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" alt="Ositos abrazados">
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const questionScreen = document.getElementById('question-screen');
+        const invitation = document.getElementById('invitation');
+
+        let fontSize = 1.2; // Tamaño inicial de la fuente
+        let padding = 10;   // Padding inicial
+
+        // Frases para intentar convencer cuando presionan "No"
+        const phrases = [
+            "No",
+            "¿Estás segura?",
+            "¿De verdad?",
+            "Piénsalo bien...",
+            "Mira que me voy a poner triste",
+            "¡Dale al otro botón!",
+            "No seas así...",
+            "¡Voy a llorar!",
+            "¡Por favoooor!",
+            "¡NO!" 
+        ];
+
+        let phraseIndex = 0;
+
+        noBtn.addEventListener('click', () => {
+            // Aumentar el tamaño del botón Sí
+            fontSize += 0.5;
+            padding += 5;
+            
+            yesBtn.style.fontSize = `${fontSize}rem`;
+            yesBtn.style.padding = `${padding}px ${padding * 2}px`;
+
+            // Cambiar el texto del botón No
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            noBtn.innerText = phrases[phraseIndex];
+        });
+
+        yesBtn.addEventListener('click', () => {
+            // Ocultar la pregunta y mostrar la invitación
+            questionScreen.style.display = 'none';
+            invitation.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
